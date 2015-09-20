@@ -1,0 +1,36 @@
+{
+  "name": "stream-split",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:131/nal-stream.git"
+  },
+  "keywords": [
+    "nal",
+    "h264",
+    "stream"
+  ],
+  "author": "Francois Leurent <131.js@cloudyks.org>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/131/nal-stream/issues"
+  },
+  "homepage": "https://github.com/131/nal-stream",
+  "dependencies": {
+    "nyks": "^1.1.5",
+    "uclass": "^2.0.6"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.2.5",
+    "istanbul": "~0.3.18"
+  },
+  "scripts": {
+    "test": " node node_modules/istanbul/lib/cli.js  cover -x child_process/* -x process/* -x crypt/* -x path/* node_modules/mocha/bin/_mocha test/"
+  },
+  "description": "A very efficient stream splitter (using buffer delimiters)",
+  "directories": {
+    "test": "test"
+  }
+}
