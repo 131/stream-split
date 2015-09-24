@@ -39,20 +39,21 @@ var Splitter = new Class({
     }
 
     chunk.copy(this.buffer, this.offset);
-    var start = Math.max(this.bodyOffset ? this.bodyOffset : 0, this.offset - this.separator.length),
-        stop = this.offset + chunk.length;
-    var i = indexOf(this.buffer, this.separator, start, stop);
 
+    var i, start, stop = this.offset + chunk.length;
+    do {
+      start = Math.max(this.bodyOffset ? this.bodyOffset : 0, this.offset - this.separator.length);
+      i = indexOf(this.buffer, this.separator, start, stop);
 
-    if (i == -1) {
-      this.offset += chunk.length;
-    } else {
+      if (i == -1)
+        break;
+
       var img = this.buffer.slice(this.bodyOffset, i);
       this.push(img);
       this.bodyOffset = i + this.separator.length;
-      this.offset += chunk.length;
-    }
+    } while(true);
 
+    this.offset += chunk.length;
     next();
   },
 

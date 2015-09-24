@@ -2,6 +2,11 @@ var expect   = require('expect.js');
 var splitter = require('../');
 
 
+
+
+
+
+
 describe("A scenario with buffer size expansion", function(){
 
   var separator = new Buffer([0,0,0,1]);
@@ -38,7 +43,7 @@ describe("A scenario with buffer size expansion", function(){
   });
 
 })
-//var foo = StreamSplitter(separator);
+
 
 
 
@@ -113,6 +118,16 @@ describe("A basic split scenario with big buffer", function(){
     foo.write(separator);
     expect(tick).to.be(3);
     expect("" + lb).to.be("okok");
+
+
+    var data = new Buffer("foo");
+
+    var bigdata = Buffer.concat([data, separator, data, data, separator]);
+    foo.write(bigdata);
+    //foo.write(new Buffer(0));
+    expect(tick).to.be(5);
+    expect("" + lb).to.be("" + data + data);
+
 
   });
 
