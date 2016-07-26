@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/131/nal-stream",
   "dependencies": {
-    "nyks": "^1.1.5",
+    "nyks": "^2.26.0",
     "uclass": "^2.0.6"
   },
   "devDependencies": {
