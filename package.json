@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:131/nal-stream.git"
+    "url": "git@github.com:131/stream-split.git"
   },
   "keywords": [
     "nal",
@@ -14,20 +14,19 @@
   "author": "Francois Leurent <131.js@cloudyks.org>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/131/nal-stream/issues"
+    "url": "https://github.com/131/stream-split/issues"
   },
-  "homepage": "https://github.com/131/nal-stream",
-  "dependencies": {
-    "nyks": "^2.26.0",
-    "uclass": "^2.0.6"
-  },
+  "homepage": "https://github.com/131/stream-split",
+  "dependencies": {},
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^2.2.5",
-    "istanbul": "~0.3.18"
+    "istanbul": "~0.3.18",
+    "mocha": "^3.1.2"
   },
   "scripts": {
-    "test": " node node_modules/istanbul/lib/cli.js  cover -x child_process/* -x process/* -x crypt/* -x path/* node_modules/mocha/bin/_mocha test/"
+    "mocha": "node node_modules/mocha/bin/_mocha",
+    "test": "node node_modules/istanbul/lib/cli.js cover --report text-summary --report html --report lcov  node_modules/mocha/bin/_mocha",
+    "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info"
   },
   "description": "A very efficient stream splitter (using buffer delimiters)",
   "directories": {

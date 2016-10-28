@@ -1,10 +1,7 @@
+"use strict";
+
 var expect   = require('expect.js');
 var splitter = require('../');
-
-
-
-
-
 
 
 describe("A scenario with buffer size expansion", function(){

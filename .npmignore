@@ -1,3 +1,3 @@
-node_modules
-coverage
-test
+/node_modules
+/coverage
+/test

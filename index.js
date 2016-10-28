@@ -1,16 +1,13 @@
 "use strict";
 
-var Class = require('uclass');
-var Transform = require('stream').Transform;
-var indexOf = require('nyks/buffer/indexOf');
+const Transform = require('stream').Transform;
 
+class Splitter extends Transform {
 
-var Splitter = new Class({
-  Extends : Transform,
-  initialize : function(separator, options) {
-    Transform.call(this);
+  constructor(separator, options) {
     if(!options)
       options = {};
+    super(options);
 
     this.offset      = 0;
     this.bodyOffset  = 0;
@@ -20,9 +17,9 @@ var Splitter = new Class({
 
     this.buffer      = new Buffer(this.bufferSize); this.buffer.fill(0);
     this.separator   = separator;
-  },
+  }
 
-  _transform : function(chunk, encoding, next){
+  _transform(chunk, encoding, next) {
 
     if (this.offset + chunk.length > this.bufferSize - this.bufferFlush) {
         var minimalLength = this.bufferSize - this.bodyOffset + chunk.length;
@@ -43,11 +40,12 @@ var Splitter = new Class({
     var i, start, stop = this.offset + chunk.length;
     do {
       start = Math.max(this.bodyOffset ? this.bodyOffset : 0, this.offset - this.separator.length);
-      i = indexOf(this.buffer, this.separator, start, stop);
+      i = this.buffer.slice(start, stop).indexOf(this.separator);
 
       if (i == -1)
         break;
 
+      i += start;
       var img = this.buffer.slice(this.bodyOffset, i);
       this.push(img);
       this.bodyOffset = i + this.separator.length;
@@ -55,9 +53,8 @@ var Splitter = new Class({
 
     this.offset += chunk.length;
     next();
-  },
-
-});
+  }
+};
 
 
 
